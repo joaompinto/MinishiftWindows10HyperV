@@ -51,7 +51,7 @@ At this point all the tasks requiring admin privileges are down, the next instru
 
 ## Configure GIT Bash
 
-Open the GIT Bash and execute:
+Open Git Bash and execute:
 
 ```bash
 mkdir ~/bin
@@ -62,7 +62,13 @@ cd  ~/bin ; explorer .
 
 # Adjust the PATH for the running shell
 source ~/.bashrc
+```
 
+## Starting Minishift
+
+Open Git Bash and execute:
+
+```bash
 
 # The start will take several minutes depending on your network bandwith and system HW
 
