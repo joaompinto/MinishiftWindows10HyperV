@@ -23,7 +23,8 @@ Once the reboot was performed to active HyperV, add your local user to Hyper-V A
 
 Open PowerShell with **Admintrator** privileges and execute:
 ```powershell
-Add-LocalGroupMember -Group "Hyper-V Administrators" -Member "your_user_name"
+$group = [ADSI]("WinNT://"+$env:COMPUTERNAME+"/Hyper-V Administrators,group")
+$group.add("WinNT://$env:USERDOMAIN/$env:USERNAME,user")
 ```
 
 Create a Virtual Switch to provide NAT for the minishift VM:
@@ -55,7 +56,7 @@ Open Git Bash and execute:
 
 ```bash
 mkdir ~/bin
-echo "export PATH=$PATH:$HOME/bin" >> ~/.bashrc
+echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
 cd  ~/bin ; explorer .
 
 # Using windows copy "minishift.exe"; "kubectl.exe"; "oc.exe" from the downloaded zip files into the 'bin' folder
@@ -74,8 +75,6 @@ Open Git Bash and execute:
 
 # Start minishift
 minishift.exe start \
-  --cpus 4 \
-  --memory 8GB \
   --hyperv-virtual-switch  MinishiftNAT \
   --network-ipaddress 192.168.50.10 \
   --network-gateway 192.168.50.1 \
